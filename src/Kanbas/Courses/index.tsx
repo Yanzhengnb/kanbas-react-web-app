@@ -3,28 +3,33 @@ import Modules from "./Modules";
 import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/Editor";
 import Home from "./Home";
-import { Navigate, Route, Routes } from "react-router";
+import { Route, Routes } from "react-router";
+import { FaAlignJustify } from "react-icons/fa";
+import PeopleTable from "./People/Table";
+
 export default function Courses() {
   return (
-    <div id="wd-courses">
-      <h2>Course 1234</h2>
+    <div id="wd-courses" className="container-fluid">
+      <h2 className="text-danger">
+        <FaAlignJustify className="me-3 fs-3 mb-1" />
+        Course 1234
+      </h2>
       <hr />
-      <table>
-        <tr>
-          <td valign="top">
-            <CoursesNavigation />
-          </td>
-          <td valign="top">
-            <Routes>
-              <Route path="/" element={<Navigate to="Home" />} />
-              <Route path="Home" element={<Home />} />
-              <Route path="Modules" element={<Modules />} />
-              <Route path="Assignments" element={<Assignments />} />
-              <Route path="Assignments/:aid" element={<AssignmentEditor />} />
-              <Route path="People" element={<h3>People</h3>} />
-            </Routes>
-          </td>
-        </tr>
-      </table>
+      <div className="row">
+        <div className="col-md-2 d-none d-md-block">
+          <CoursesNavigation />
+        </div>
+        <div className="col-md-8 flex-fill">
+          <Routes>
+            <Route path="Home" element={<Home />} />
+            <Route path="Modules" element={<Modules />} />
+            <Route path="Assignments" element={<Assignments />} />
+            <Route path="Assignments/:aid" element={<AssignmentEditor />} />
+            <Route path="People" element={<PeopleTable />} />
+          </Routes>
+        </div>
+      </div>
     </div>
-);}
+  );
+}
+
