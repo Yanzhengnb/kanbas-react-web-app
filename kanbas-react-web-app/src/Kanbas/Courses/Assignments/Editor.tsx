@@ -1,7 +1,14 @@
-import { FaSearch, FaPlus } from 'react-icons/fa';
+import { useParams, Link } from 'react-router-dom';
+import * as db from "../../Database";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function AssignmentEditor() {
+  const { cid, aid } = useParams();
+  const assignment = db.assignments.find(a => a._id === aid && a.course === cid);
+  if (!assignment) {
+    return <div>Assignment not found</div>;
+  }
+
   return (
     <div id="wd-assignments-editor" className="container-fluid mt-4">
 
@@ -9,7 +16,7 @@ export default function AssignmentEditor() {
       <div className="mb-3 row">
         <label htmlFor="wd-name" className="col-sm-2 col-form-label text-end">Assignment Name</label>
         <div className="col-sm-10">
-          <input id="wd-name" className="form-control" defaultValue="A1" />
+          <input id="wd-name" className="form-control" defaultValue={assignment.title} />
         </div>
       </div>
 
@@ -26,104 +33,51 @@ export default function AssignmentEditor() {
       </div>
 
       <div className="mb-3 row">
-  <label htmlFor="wd-points" className="col-sm-4 col-form-label text-end">Points</label>
-  <div className="col-sm-8">
-    <input id="wd-points" className="form-control" defaultValue={100} />
-  </div>
-</div>
-            
-          <div className="mb-3 row">
-  <label htmlFor="wd-group" className="col-sm-4 col-form-label text-end">Assignment Group</label>
-  <div className="col-sm-8">
-    <select id="wd-group" className="form-select">
-      <option selected>ASSIGNMENT</option>
-      <option value="NON ASSIGNMENT">NON ASSIGNMENT</option>
-    </select>
-  </div>
-</div>
-
-            
-<div className="container-fluid mt-4">
-  <div className="mb-3 row">
-    <label htmlFor="wd-display-grade-as" className="col-sm-4 col-form-label text-end">Display Grade as</label>
-    <div className="col-sm-8">
-      <select id="wd-display-grade-as" className="form-select">
-        <option value="Percentage">Percentage</option>
-        <option value="Digital">Digital</option>
-      </select>
-    </div>
-  </div>
+        <label htmlFor="wd-points" className="col-sm-4 col-form-label text-end">Points</label>
+        <div className="col-sm-8">
+          <input id="wd-points" className="form-control" defaultValue={100} />
+        </div>
+      </div>
 
 
-  <div className="mb-4 border p-3 rounded col-sm-8 offset-sm-4">
+
+      <div className=" border p-3 rounded col-sm-8 offset-sm-4">
+
+        <label htmlFor="wd-assign-to" className="col-sm-3 col-form-label">Assign to</label>
         <div className="mb-3 row">
           <div className="col-sm-12">
-            <select id="wd-submission-type" className="form-select">
-              <option value="Online">Online</option>
-              <option value="In Person">In Person</option>
-            </select>
+            <input id="wd-assign-to" className="form-control " defaultValue="Everyone" />
           </div>
         </div>
-
-        <label>Online Entry Options</label>
-        <div className="mb-2">
-          <input type="checkbox" name="wd-text-entry" id="wd-text-entry" />
-          <label htmlFor="wd-text-entry"> Test Entry</label>
+        <label htmlFor="wd-due-date" className="col-sm-3 col-form-label ">Due</label>
+        <div className="mb-3 row">
+          <div className="col-sm-12">
+            <input type="date" id="wd-due-date" className="form-control" defaultValue="2024-05-13T23:59" />
+          </div>
         </div>
-        <div className="mb-2">
-          <input type="checkbox" name="wd-website-url" id="wd-website-url" />
-          <label htmlFor="wd-website-url"> Website URL</label>
-        </div>
-        <div className="mb-2">
-          <input type="checkbox" name="wd-media-recordings" id="wd-media-recordings" />
-          <label htmlFor="wd-media-recordings"> Media Recordings</label>
-        </div>
-        <div className="mb-2">
-          <input type="checkbox" name="wd-student-annotation" id="wd-student-annotation" />
-          <label htmlFor="wd-student-annotation"> Student Annotation</label>
-        </div>
-        <div className="mb-2">
-          <input type="checkbox" name="wd-file-upload" id="wd-file-upload" />
-          <label htmlFor="wd-file-upload"> File Uploads</label>
+        <div className="mb-3 row">
+          <div className="col">
+            <label htmlFor="wd-available-from" className="text-end">Available from</label>
+            <input type="date" id="wd-available-from" className="form-control" defaultValue="2024-05-06T00:00" />
+          </div>
+          <div className="col">
+            <label htmlFor="wd-available-until" className="text-end">Until</label>
+            <input type="date" id="wd-available-until" className="form-control" defaultValue="2024-05-20T00:00" />
+          </div>
         </div>
       </div>
-      </div>
-      <div className="mb-4 border p-3 rounded col-sm-8 offset-sm-4">
-      <label htmlFor="wd-assign-to" className="col-sm-3 col-form-label">Assign to</label>
-<div className="mb-3 row">
-    <div className="col-sm-9">
-      <input id="wd-assign-to" className="form-control " defaultValue="Everyone" />
-    </div>
-  </div>
-      <label htmlFor="wd-due-date" className="col-sm-3 col-form-label ">Due</label>
-<div className="mb-3 row">
-    <div className="col-sm-9">
-      <input type="date" id="wd-due-date" className="form-control" defaultValue="2024-05-13" />
-    </div>
-  </div>
-  <div className="mb-3 row">
-    <div className="col">
-      <label htmlFor="wd-available-from" className="text-end">Available from</label>
-      <input type="date" id="wd-available-from" className="form-control" defaultValue="2024-05-06" />
-    </div>
-    <div className="col">
-      <label htmlFor="wd-available-until" className="text-end">Until</label>
-      <input type="date" id="wd-available-until" className="form-control" defaultValue="2024-05-20" />
-    </div>
-  </div>
-</div>
 
-      <hr  />
+      <hr />
 
-      {/* Action Buttons */}
       <div className="d-flex justify-content-end mt-3">
-       <button className="btn btn-secondary me-2">
-           Cancel
-        </button> 
-        <button className="btn btn-danger me-2">
+        <Link to={`/Kanbas/Courses/${cid}/Assignments`} className="btn btn-secondary me-2">
+          Cancel
+        </Link>
+
+        <Link to={`/Kanbas/Courses/${cid}/Assignments`} className="btn btn-danger me-2">
           Save
-        </button>
-        
+        </Link>
+
       </div>
     </div>
   );
