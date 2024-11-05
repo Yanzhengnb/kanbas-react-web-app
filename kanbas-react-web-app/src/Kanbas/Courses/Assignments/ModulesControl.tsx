@@ -1,11 +1,19 @@
 import { FaPlus } from "react-icons/fa6";
 import { FaSearch } from 'react-icons/fa';
+import Addassignment from "./Addassignment";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 export default function ModulesControls() {
+  const navigate = useNavigate();
+  const goToEditor = () => {
+    navigate("/Kanbas/Courses/Assignments/A101"); 
+  };
   return (
     <div id="wd-modules-controls" className="text-nowrap">
-      <button id="wd-add-module-btn" className="btn btn-lg btn-danger me float-end">
-        <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
-        Assignment</button>
+      <button id="wd-add-module-btn" className="btn btn-lg btn-danger me float-end " onClick={goToEditor}>
+    <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
+    Assignment
+  </button>
       <div className="d-inline me-1 float-end">
         <button id="wd-publish-all-btn" className="btn btn-lg btn-secondary "
           type="button" >
@@ -26,6 +34,7 @@ export default function ModulesControls() {
                 />
                 <FaSearch className="position-absolute" style={{ left: '10px', top: '50%', transform: 'translateY(-50%)' }} />
             </div>
-            </div></div>
+            </div>
+            </div>
         
 );}
