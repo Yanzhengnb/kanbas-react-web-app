@@ -1,11 +1,9 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import * as db from "../../Database";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { addAssignment, updateAssignment } from "./reducer";
-import * as assignmentsClient from "./client"
 import * as coursesClient from "../client";
 import { useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 
 export default function AssignmentEditor() {
   const [editor,seteditor]= useState<any>({});
@@ -13,11 +11,8 @@ export default function AssignmentEditor() {
   const navigate = useNavigate();
   const { cid, aid } = useParams();
   const [assignmentName, setAssignmentName] = useState("");
-  const assignment = db.assignments.find(a => a._id === aid && a.course === cid);
   
-if (!assignment) {
-    return <div>Assignment not found</div>;
-  }
+
 const createAssignmentForCourse = async () => {
   if (!cid) return;
   const newAssignment = { name: assignmentName, course: cid };
@@ -32,7 +27,7 @@ const createAssignmentForCourse = async () => {
       <div className="mb-3 row">
         <label htmlFor="wd-name" className="col-sm-2 col-form-label text-end">Assignment Name</label>
         <div className="col-sm-10">
-          <input id="wd-name" className="form-control" defaultValue={assignment.title} onChange={(e)=>setAssignmentName(e.target.value)} />
+          <input id="wd-name" className="form-control" defaultValue={"New Assignment"} onChange={(e)=>setAssignmentName(e.target.value)} />
         </div>
       </div>
 

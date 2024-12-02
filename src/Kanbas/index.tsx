@@ -16,6 +16,7 @@ export default function Kanbas() {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const fetchCourses = async () => {
     try {
+      console.log('in fetch course' )
       const courses = await userClient.findMyCourses();
       setCourses(courses);
     } catch (error) {
@@ -66,6 +67,7 @@ export default function Kanbas() {
               updateCourse={updateCourse}/>
           </ProtectedRoute>} />
           <Route path="Courses/:cid/*" element={<ProtectedRoute><Courses courses={courses} /></ProtectedRoute>} />
+
         </Routes>
         
       </div>

@@ -3,18 +3,23 @@ import { FaCheckCircle, FaCircle, FaTrash } from "react-icons/fa";
 import { IoEllipsisVertical } from "react-icons/io5";
 import DeleteAssignmentDialog from "./Deleteassignment";
 import Facultyonly from "../../Account/Facultyonly";
+import { FaPencil } from "react-icons/fa6";
 export default function GreenCheckmark({
   assignmentId,
   deleteAssignment,
+  editAssignment,
 }: {
   assignmentId: string;
   deleteAssignment: (assignmentId: string) => void;
+  editAssignment: (assignmentId: string) => void
 }) {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
   return (
     <div className="float-end">
       <Facultyonly>
+      <FaPencil onClick={() => editAssignment(assignmentId)} className="text-primary me-3" />
+
       <FaTrash
         className="text-danger position-relative me-2"
         style={{ top: "2px" }}
@@ -28,7 +33,6 @@ export default function GreenCheckmark({
         <FaCircle className="text-white me-1 fs-6" />
       </span>
       <IoEllipsisVertical className="fs-4" />
-
       <DeleteAssignmentDialog
         show={showDeleteDialog}
         onHide={() => setShowDeleteDialog(false)}
@@ -36,7 +40,8 @@ export default function GreenCheckmark({
           deleteAssignment(assignmentId);
           setShowDeleteDialog(false);
         }}
-      />
+      />      
+
     </div>
   );
 }

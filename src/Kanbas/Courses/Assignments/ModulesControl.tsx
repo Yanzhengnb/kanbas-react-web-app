@@ -1,7 +1,5 @@
 import { FaPlus } from "react-icons/fa6";
 import { FaSearch } from 'react-icons/fa';
-import Addassignment from "./Addassignment";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 export default function ModulesControls() {
   const navigate = useNavigate();
