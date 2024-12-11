@@ -89,8 +89,8 @@ export default function courses1(
                         }} className="btn btn-danger float-end"
                           id="wd-delete-course-click">
                           Delete
-                        </button></Facultyonly >
-                      <Facultyonly><button id="wd-edit-course-click"
+                        </button>
+                        <button id="wd-edit-course-click"
                         onClick={(event) => {
                           event.preventDefault();
                           setCourse(course);

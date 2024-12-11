@@ -7,6 +7,7 @@ import Facultyonly from "../../Account/Facultyonly";
 import { useEffect, useState } from "react";
 import { setModules, addModule, editModule, updateModule, deleteModule } from "./reducer";
 import * as coursesClient from "../client";
+import { v4  } from 'uuid';
 import * as modulesClient from "./client";
 import { useSelector, useDispatch } from "react-redux";
 export default function Modules() {
@@ -18,20 +19,15 @@ export default function Modules() {
     await modulesClient.updateModule(module);
     dispatch(updateModule(module));
   };
-const fetchModules = async () => {
-    const modules = await coursesClient.findModulesForCourse(cid as string);
-    dispatch(setModules(modules));
-  };
-  useEffect(() => {
-    fetchModules();
-  }, []);
+
   const createModuleForCourse = async () => {
     if (!cid) return;
-    const newModule = { name: moduleName, course: cid };
+    const newModule = { name: moduleName, course: cid};
+    const new_id = moduleName;
     const module = await coursesClient.createModuleForCourse(cid, newModule);
     dispatch(addModule(module));
   };
-  const removeModule = async (moduleId: string) => {
+  const removeModule = async (moduleId: any) => {
     await modulesClient.deleteModule(moduleId);
     dispatch(deleteModule(moduleId));
   };

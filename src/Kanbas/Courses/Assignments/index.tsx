@@ -40,7 +40,7 @@ export default function Assignments() {
                                             className="wd-assignment-link fw-bold"
                                             to={`/Kanbas/Courses/${cid}/Assignments/NewAssignmentEditor`}
                                             style={{ color: 'black', textDecoration: 'none' }}
-                                        >
+                >
       <button id="wd-add-module-btn" className="btn btn-lg btn-danger me float-end " >
     <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
     Assignment
@@ -76,7 +76,7 @@ export default function Assignments() {
                 
             
                 <ul id="wd-assignment" className="list-group rounded-0">
-                <div className="wd-title p-3 ps-2 bg-secondary">
+                <div className=" p-3 ps-1 bg-secondary">
                 <h3 id="wd-assignments-title" className="mb-4 d-flex justify-content-between align-items-center">
                     
                     <div>
