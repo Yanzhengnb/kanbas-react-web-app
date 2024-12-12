@@ -3,7 +3,7 @@ import { CiSearch } from "react-icons/ci";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { IoEllipsisVertical } from "react-icons/io5";
-import ModuleEditor from "./ModuleEditor";
+import ModuleEditor from "./Addquiz";
 
 export default function QuizControls({  moduleName, setModuleName, addModule }:
   {  moduleName: string; setModuleName: (name: string) => void; addModule: () => void; }) {

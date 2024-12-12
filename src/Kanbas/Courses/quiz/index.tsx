@@ -13,7 +13,7 @@ const dispatch = useDispatch();
 const { cid } = useParams(); 
 const [moduleName, setModuleName] = useState("");
 const [assignmentName, setAssignmentName] = useState("");
-    const { assignments } = useSelector((state: any) => state.assignmentReducer);
+    const { assignments } = useSelector((state: any) => state.quizReducer);
     const saveModule = async (assignment: any) => {
         await assignmentsClient.updateAssignment(assignment);
         dispatch(updateAssignment(assignment));
@@ -21,23 +21,21 @@ const [assignmentName, setAssignmentName] = useState("");
         await assignmentsClient.deleteAssignment(assignmentId);
         dispatch(deleteAssignment(assignmentId));
     };
-    const createModuleForCourse = async () => {
+
+    const createQuizForCourse = async () => {
         if (!cid) return;
-        const newModule = { name: moduleName, course: cid };
-        const module = await assignmentsClient.createModuleForCourse(cid, newModule);
+        const newModule = { title: moduleName, course: cid };
+        const module = await assignmentsClient.createQuizForCourse(cid, newModule);
         dispatch(addModule(module));
       };
-      const [quiz, setquiz] = useState<any>({
-        _id: "1234", name: "Q1", number: "New Number",
-        startDate: "2023-09-10", endDate: "2023-12-15"
-      });
+
    
     return (
       <div>
-      <QuizControls setModuleName={setModuleName} moduleName={moduleName} addModule={createModuleForCourse}/><hr></hr>
+      <QuizControls setModuleName={setModuleName} moduleName={moduleName} addModule={createQuizForCourse}/><hr></hr>
       <ul id="wd-assignment" className="list-group rounded-0">
 
-      <li key={"Quiz"} className="wd-assignments p-3 ps-2 bg-secondary d-flex justify-content-between border align-items-center">
+      <li  className="wd-assignments p-3 ps-2 bg-secondary d-flex justify-content-between border align-items-center">
         <h3 className="mb-4 d-flex justify-content-between align-items-center">
         <IoMdArrowDropdown />
         Assignments Quizzes
@@ -50,16 +48,16 @@ const [assignmentName, setAssignmentName] = useState("");
                         .filter((assignment: any) => assignment.course === cid)
                         .map((assignment: any) => (
                         
-                            <li  key={"Quiz"} className="wd-lesson list-group-item p-3 ps-1 d-flex align-items-center justify-content-between">
+                            <li  key={assignment._id} className="wd-lesson list-group-item p-3 ps-1 d-flex align-items-center justify-content-between">
                                 <div className="d-flex align-items-center">
                                     <IoRocket className="me-1 fs-3" />
                                     <div className="d-flex align-items-center">
                                         <Link
                                             className="wd-assignment-link fw-bold"
-                                            to={`/Kanbas/Courses/${cid}/Quizzs`}
+                                            to={`/Kanbas/Courses/${cid}/Quizzes`}
                                             //to={`/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}
                                         style={{ color: 'black', textDecoration: 'none' }}>
-                                    {!assignment.editing && "Quiz"}
+                                    {!assignment.editing && assignment.title}
 
                                         </Link>
                                     </div>
@@ -73,7 +71,7 @@ const [assignmentName, setAssignmentName] = useState("");
                   saveModule({ ...assignment, editing: false });
                 }
                }}
-               defaultValue={"quiz"}/>
+               defaultValue={assignment.title}/>
       )} 
                                 <GreenCheckmark
                                     assignmentId={assignment._id}

@@ -2,7 +2,7 @@ import axios from "axios";
 const REMOTE_SERVER = process.env.REACT_APP_REMOTE_SERVER;
 const COURSES_API = `${REMOTE_SERVER}/api/courses`;
 const axiosWithCredentials = axios.create({ withCredentials: true });
-const MODULES_API = `${REMOTE_SERVER}/api/modules`;
+const MODULES_API = `${REMOTE_SERVER}/api/quizzes`;
 const ASSIGNMENTS_API = `${REMOTE_SERVER}/api/assignments`;
 
 export const createAssignment = async ( assignment: any) => {
@@ -26,10 +26,10 @@ export const deleteAssignment = async (assignmentId: string) => {
   console.log(response)
   return response.data;
 };
-export const createModuleForCourse = async (courseId: string, module: any) => {
+export const createQuizForCourse = async (courseId: string, quiz: any) => {
   const response = await axiosWithCredentials.post(
-    `${COURSES_API}/${courseId}/modules`,
-    module
+    `${COURSES_API}/${courseId}/quizzes`,
+    quiz
   );
   return response.data;
 };
